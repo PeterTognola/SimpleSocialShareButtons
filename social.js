@@ -1,50 +1,49 @@
-﻿var socialButtons = {
-    imageLocation: "images/social.svg", // todo fallback.
+var socialButtons = {
     socialSites: [
         {
             name: "Buffer",
             url: "https://bufferapp.com/add?url={url}&text={title} Share Buttons",
-            image: socialButtons.imageLocation + "#buffer"
+            image: "#buffer"
         },
         {
             name: "email",
             url: "mailto:?Subject={title}&Body={body} - {url}",
-            image: socialButtons.imageLocation + "#email" // todo icon for email
+            image: "#email" // todo icon for email
         },
         {
             name: "Facebook",
             url: "https://facebook.com/sharer.php?u={url}&t={title}",
-            image: socialButtons.imageLocation + "#facebook"
+            image: "#facebook"
         },
         {
             name: "Google Plus",
             url: "https://plus.google.com/share?url={url}",
-            image: socialButtons.imageLocation + "#googleplus"
+            image: "#googleplus"
         },
         {
             name: "LinkedIn",
             url: "http://www.linkedin.com/shareArticle?mini=true&url={url}",
-            image: socialButtons.imageLocation + "#linkedin"
+            image: "#linkedin"
         },
         {
             name: "Print",
             url: "javascript:window.print();",
-            image: socialButtons.imageLocation + "#print" // todo icon for print.
+            image: "#print" // todo icon for print.
         },
         {
             name: "Pinterest",
             url: "javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());",
-            image: socialButtons.imageLocation + "#pinterest"
+            image: "#pinterest"
         },
         {
             name: "Tumblr",
             url: "http://www.tumblr.com/share/link?url={url}&title={title}",
-            image: socialButtons.imageLocation + "#tumblr"
+            image: "#tumblr"
         },
         {
             name: "Twitter",
             url: "https://twitter.com/share?url={url}&text={body}",
-            image: socialButtons.imageLocation + "#twitter"
+            image: "#twitter"
         }
     ],
 
@@ -70,6 +69,7 @@
         social.title = encodeURIComponent(social.title);
         social.body = encodeURIComponent(social.body);
         site.url = socialButtons.swapObjectNames(social, site.url);
+        site.image = social.image + site.image;
 
         return site;
     },
@@ -88,12 +88,11 @@
             socialObject = {
                 url: url ? url.toLowerCase() : window.location.href,
                 title: title || document.title,
-                body: body || ""
+                body: body || "",
+                image: socialImageUrl || "images/social.svg"
             },
             html = itemHtml || "<a href=\"{url}\" style=\"display:inline-block;width:48px;height:48px\" target=\"_blank\"><img src=\"{image}\" alt=\"Share On {name}\" style=\"width:48px;height:48px\" /></a>",
             finalHtml = "";
-
-        if (socialImageUrl !== undefined && socialImageUrl !== null) socialButtons.imageLocation = socialImageUrl;
 
         socialButtons.socialSites.forEach(function (site) { formattedExcluded.indexOf(site.name.toLowerCase()) < 0 && sites.push(site) });
 
@@ -101,7 +100,9 @@
             finalHtml += socialButtons.generateHtml(socialButtons.generate(sites[i], socialObject), html);
         }
 
-        if (element !== undefined && element !== null) element.innerHtml = finalHtml;
+        if (element !== undefined && element !== null) {
+            element.innerHTML = finalHtml;
+        }
 
         return finalHtml;
     }
