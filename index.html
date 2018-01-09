@@ -3,6 +3,26 @@
 <head>
     <meta charset="utf-8" />
     <title>Simple Social Example</title>
+    <style>
+        body {
+            background-color:#dcdcdc;
+        }
+        
+        div#socialHere {
+            padding:60px;
+            text-align:center;
+        }
+        
+        div#socialHere a {
+            padding: 5px;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+        
+        div#socialHere a:hover {
+            transform: translateY(-5px);
+        }
+    </style>
 </head>
 <body>
     <div id="socialHere"></div>
