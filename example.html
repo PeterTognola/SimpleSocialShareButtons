@@ -8,28 +8,37 @@
     <div id="socialHere"></div>
     
     <section>
-        <h1>Todo List</h1>
+        <h1>To do List</h1>
     
         <ul>
-            <li>Simpler config instead of lots of params;</li>
-            <li>Fallback for SVG image;</li>
+            <li>Simpler config instead of lots of params.</li>
+            <li>Fallback for SVG image.</li>
             <li>An image for both email and print.</li>
         </ul>
     </section>
     
     <script src="social.js" type="text/javascript"></script>
     <script>
-        // Returns HTML for all social buttons.
-        var social = socialButtons.setup();
+        // All configuration and returns HTML of social buttons.
+        var customSocial =
+            socialButtons.setup(
+                null, // Element to put social HTML in.
+                ["excludeList"],
+                null, // Item HTML e.g. <a href="{url}">{title}</a><p>{body}</p><img src="{image}" alt="{name}" />
+                "url/to/social/images",
+                "url goes here",
+                "title goes here",
+                "body goes here");
 
-        // Returns HTML for all social buttons but with a custom URL, title and body.
-        var customSocial = socialButtons.setup(null, null, null, null, "url goes here", "title goes here", "body goes here");
-
-        // Returns HTML with custom social image location.
-        var customSocial = socialButtons.setup(null, null, null, "url/to/social/images");
-
-        // Returns social buttons, excludes twitter and sets the innerHTML of 'socialHere' to the social buttons.
-        socialButtons.setup(document.getElementById("socialHere"), ["twitter"]);
+        // Excludes twitter and sets the innerHTML of 'socialHere' to the social buttons.
+        socialButtons.setup(
+            document.getElementById("socialHere"),
+            ["twitter"],
+            null,
+            null,
+            "https://petertognola.github.io/SimpleSocialShareButtons/",
+            "Simple Social Share Title",
+            "Really simple social share body");
     </script>
 </body>
 </html>
